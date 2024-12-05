@@ -59,8 +59,9 @@ public class ProductService {
     public void save(ProductDTO productDTO) {
 
         Product product = convertToEntity(productDTO);
-        if(product.getImgProductPath().equals("") || product.getImgProductPath().equals("string"))
-            product.setImgProductPath("https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/Screenshot%202024-11-26%20072516.png?alt=media&token=8f40cfd8-bbb4-46eb-b114-21f7f8d4156f");
+        if (product.getImgProductPath().equals("") || product.getImgProductPath().equals("string"))
+            product.setImgProductPath(
+                    "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/Screenshot%202024-11-26%20072516.png?alt=media&token=8f40cfd8-bbb4-46eb-b114-21f7f8d4156f");
         productRepository.save(product);
 
         List<NutrientProduct> nutrientProducts = productDTO.getNutrientProducts().stream()
@@ -117,7 +118,7 @@ public class ProductService {
     public String upload(MultipartFile multipartFile, Integer idProduct) {
         try {
             Product product = productRepository.findById(idProduct).get();
-            if(product==null){
+            if (product == null) {
                 return "Product not found";
             }
             String fileName = multipartFile.getOriginalFilename();
@@ -150,12 +151,27 @@ public class ProductService {
     private String uploadFile(File file, String fileName) throws IOException {
         BlobId blobId = BlobId.of("webservices-2024spring-17", fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
-        InputStream inputStream = ProductService.class.getClassLoader().getResourceAsStream("/etc/secrets/firebase-private-key.json");
-        Credentials credentials = GoogleCredentials.fromStream(inputStream);
-        Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
-        storage.create(blobInfo, Files.readAllBytes(file.toPath()));
 
-        String downloadURL = "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/%s?alt=media";
+        try (InputStream inputStream = ProductService.class.getClassLoader()
+                .getResourceAsStream("/etc/secrets/firebase-private-key.json");) {
+            Credentials credentials = GoogleCredentials.fromStream(inputStream);
+            Storage storage = StorageOptions.newBuilder()
+                    .setCredentials(credentials)
+                    .build()
+                    .getService();
+
+            storage.create(blobInfo, Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            String message = e.getMessage();
+            System.out.println("\n\n\n\n\n");
+            e.printStackTrace();
+            System.out.println("\n\n\n\n\n" + message + "\n\n\n");
+        }
+
+        // String downloadURL =
+        // "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/%s?alt=media";
+        String downloadURL = "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/";
+
         return String.format(downloadURL, URLEncoder.encode(fileName, StandardCharsets.UTF_8));
     }
 }

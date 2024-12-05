@@ -163,14 +163,13 @@ public class ProductService {
             storage.create(blobInfo, Files.readAllBytes(file.toPath()));
         } catch (IOException e) {
             String message = e.getMessage();
-            System.out.println("\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n");
             e.printStackTrace();
-            System.out.println("\n\n\n\n\n" + message + "\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n" + message + "\n\n\n");
         }
 
-        // String downloadURL =
-        // "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/%s?alt=media";
-        String downloadURL = "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/";
+        String downloadURL ="https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/%s?alt=media";
+      //String downloadURL = "https://firebasestorage.googleapis.com/v0/b/webservices-2024spring-17/o/";
 
         return String.format(downloadURL, URLEncoder.encode(fileName, StandardCharsets.UTF_8));
     }

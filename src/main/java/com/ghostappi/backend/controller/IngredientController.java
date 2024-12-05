@@ -42,14 +42,14 @@ import com.ghostappi.backend.model.Ingredient;
                 RequestMethod.DELETE,
                 RequestMethod.PUT
 })
-@Tag(name = "Ingredients", description = "Provides methods for managing ingredients")
+@Tag(name = "Ingredients", description = "Provides methods for managing ingredients with pagination")
 
 public class IngredientController {
 
         @Autowired
         private IngredientService ingredientService;
 
-        @Operation(summary = "Get all ingredients", description = "Return a list of all ingredients with pagination")
+        @Operation(summary = "Get all ingredients with pagination", description = "Return a list of all ingredients with pagination")
         @ApiResponse(responseCode = "200", description = "Success", content = {
                         @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = Ingredient.class)))
         })

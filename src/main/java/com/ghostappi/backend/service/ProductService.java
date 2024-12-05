@@ -150,7 +150,7 @@ public class ProductService {
     private String uploadFile(File file, String fileName) throws IOException {
         BlobId blobId = BlobId.of("webservices-2024spring-17", fileName);
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
-        InputStream inputStream = ProductService.class.getClassLoader().getResourceAsStream("firebase-private-key.json");
+        InputStream inputStream = ProductService.class.getClassLoader().getResourceAsStream("/etc/secrets/firebase-private-key.json");
         Credentials credentials = GoogleCredentials.fromStream(inputStream);
         Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
         storage.create(blobInfo, Files.readAllBytes(file.toPath()));

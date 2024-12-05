@@ -1,0 +1,325 @@
+@startuml ghost
+
+class AdministrationVia {
+    - Integer idAdministrationVia
+    - String name
+
+    + AdministrationVia()
+    + AdministrationVia(Integer idAdministrationVia, String name)
+    + Integer getIdAdministrationVia()
+    + void setIdAdministrationVia(Integer idAdministrationVia)
+    + String getName()
+    + void setName(String name)
+}
+
+class Brand {
+    - Integer idBrand
+    - String name
+
+    + Brand()
+    + Brand(Integer idBrand, String name)
+    + Integer getIdBrand()
+    + void setIdBrand(Integer idBrand)
+    + String getName()
+    + void setName(String name)
+}
+class Product {
+    - Integer idProduct
+    - String comercialName
+    - BigDecimal price
+    - Date expirationDate
+    - List<String> categories
+
+    + Product()
+    + Integer getIdProduct()
+    + void setIdProduct(Integer idProduct)
+    + String getComercialName()
+    + void setComercialName(String comercialName)
+    + BigDecimal getPrice()
+    + void setPrice(BigDecimal price)
+    + Date getExpirationDate()
+    + void setExpirationDate(Date expirationDate)
+    + List<String> getCategories()
+    + void setCategories(List<String> categories)
+}
+
+class Card {
+    - Integer idCard
+    - Integer number
+    - String type
+    - Date expirationDate
+
+    + Card()
+    + Integer getIdCard()
+    + void setIdCard(Integer idCard)
+    + Integer getNumber()
+    + void setNumber(Integer number)
+    + String getType()
+    + void setType(String type)
+    + Date getExpirationDate()
+    + void setExpirationDate(Date expirationDate)
+}
+
+class Category {
+    - Integer idCategory
+    - String name
+
+    + Category()
+    + Integer getIdCategory()
+    + void setIdCategory(Integer idCategory)
+    + String getName()
+    + void setName(String name)
+}
+
+class Coupon {
+    - Integer idCoupon
+    - String codeDiscount
+    - String description
+    - Date initDate
+    - Date expirationDate
+    - Integer discountPercentage
+    - Boolean status
+    - Category idCategory
+
+    + boolean isExpired()
+    + Boolean getStatus()
+    + void setStatus(Boolean status)
+    + Integer getIdCoupon()
+    + void setIdCoupon(Integer idCoupon)
+    + String getCodeDiscount()
+    + void setCodeDiscount(String codeDiscount)
+    + String getDescription()
+    + void setDescription(String description)
+    + Date getInitDate()
+    + void setInitDate(Date initDate)
+    + Date getExpirationDate()
+    + void setExpirationDate(Date expirationDate)
+    + Integer getDiscountPercentage()
+    + void setDiscountPercentage(Integer discountPercentage)
+    + Category getIdCategory()
+    + void setIdCategory(Category idCategory)
+}
+
+class Excercise {
+    - Integer idExcercise
+    - String name
+    - String difficulty
+
+    + Excercise()
+    + Excercise(Integer idExcercise, String name, String difficulty)
+    + Integer getIdExcercise()
+    + void setIdExcercise(Integer idExcercise)
+    + String getName()
+    + void setName(String name)
+    + String getDifficulty()
+    + void setDifficulty(String difficulty)
+}
+
+class Nutrient {
+    - Integer idNutrient
+    - String name
+
+    + getIdNutrient() : Integer
+    + setIdNutrient(Integer idNutrient) : void
+    + getName() : String
+    + setName(String name) : void
+}
+
+class NutrientProduct {
+    - Nutrient nutrient
+    - Product product
+    - BigDecimal quantity
+
+    + Nutrient getNutrient()
+    + void setNutrient(Nutrient nutrient)
+    + Product getProduct()
+    + void setProduct(Product product)
+    + BigDecimal getQuantity()
+    + void setQuantity(BigDecimal quantity)
+}
+
+class Points {
+    - Integer idPoints
+    - Integer accumulatedPoints
+    - Integer userId
+    - Product product
+
+    + Integer getIdPoints()
+    + void setIdPoints(Integer idPoints)
+    + Integer getAccumulatedPoints()
+    + void setAccumulatedPoints(Integer accumulatedPoints)
+    + Integer getUserId()
+    + void setUserId(Integer userId)
+    + Product getProduct()
+    + void setProduct(Product product)
+    + String toString()
+}
+
+class User {
+    - Integer idUser
+    - String name
+    - String lastName
+    - String email
+    - String password
+    - String phone
+    - String gender
+    - Boolean status
+    - Date bornDate
+    - Boolean isCostumer
+
+    + Integer getIdUser()
+    + void setIdUser(Integer idUser)
+    + String getName()
+    + void setName(String name)
+    + String getLastName()
+    + void setLastName(String lastName)
+    + String getEmail()
+    + void setEmail(String email)
+    + String getPassword()
+    + void setPassword(String password)
+    + String getPhone()
+    + void setPhone(String phone)
+    + String getGender()
+    + void setGender(String gender)
+    + Boolean getStatus()
+    + void setStatus(Boolean status)
+    + Date getBornDate()
+    + void setBornDate(Date bornDate)
+    + Boolean getIsCostumer()
+    + void setIsCostumer(Boolean isCostumer)
+}
+
+class TrainingRoutine {
+    - Integer idTrainingRoutine
+    - String routineName
+    - Date registrationDate
+    - Integer idUser
+
+    + Integer getIdTrainingRoutine()
+    + void setIdTrainingRoutine(Integer idTrainingRoutine)
+    + String getRoutineName()
+    + void setRoutineName(String routineName)
+    + Date getRegistrationDate()
+    + void setRegistrationDate(Date registrationDate)
+    + Integer getIdUser()
+    + void setIdUser(Integer idUser)
+}
+
+class TrainingRoutineExcercise {
+    - TrainingRoutine trainingRoutine
+    - Excercise excercise
+    - Byte sets
+    - Byte reps
+
+    + TrainingRoutine getTrainingRoutine()
+    + void setTrainingRoutine(TrainingRoutine trainingRoutine)
+    + Excercise getExcercise()
+    + void setExcercise(Excercise excercise)
+    + Byte getSets()
+    + void setSets(Byte sets)
+    + Byte getReps()
+    + void setReps(Byte reps)
+}
+
+class ShoppingCart {
+    - Integer idShoppingCart
+    - BigDecimal totalAmount
+    - Short totalProducts
+    - Integer idUser
+
+    + Integer getIdShoppingCart()
+    + void setIdShoppingCart(Integer idShoppingCart)
+    + BigDecimal getTotalAmount()
+    + void setTotalAmount(BigDecimal totalAmount)
+    + Short getTotalProducts()
+    + void setTotalProducts(Short totalProducts)
+    + Integer getIdUser()
+    + void setIdUser(Integer idUser)
+}
+
+class ShoppingCartProduct {
+    - ShoppingCart shoppingCart
+    - Product product
+    - Short quantity
+
+    + ShoppingCart getShoppingCart()
+    + void setShoppingCart(ShoppingCart shoppingCart)
+    + Product getProduct()
+    + void setProduct(Product product)
+    + Short getQuantity()
+    + void setQuantity(Short quantity)
+}
+
+class Sale {
+    - Integer idSale
+    - Date date
+    - BigDecimal total
+    - String paymentMethod
+    - Integer generatedPoints
+    - User user
+
+    + Integer getIdSale()
+    + void setIdSale(Integer idSale)
+    + Date getDate()
+    + void setDate(Date date)
+    + BigDecimal getTotal()
+    + void setTotal(BigDecimal total)
+    + String getPaymentMethod()
+    + void setPaymentMethod(String paymentMethod)
+    + Integer getGeneratedPoints()
+    + void setGeneratedPoints(Integer generatedPoints)
+    + User getUser()
+    + void setUser(User user)
+}
+
+class Reward {
+    - Integer idReward
+    - Integer productId
+    - Integer goalPoints
+    - String description
+
+    + Integer getIdReward()
+    + void setIdReward(Integer idReward)
+    + Integer getProductId()
+    + void setProductId(Integer productId)
+    + Integer getGoalPoints()
+    + void setGoalPoints(Integer goalPoints)
+    + String getDescription()
+    + void setDescription(String description)
+}
+class Wallet {
+    - Integer idWallet
+    - Integer userId
+    - List<Card> cards
+
+    + Wallet()
+    + getIdWallet() : Integer
+    + setIdWallet(Integer idWallet) : void
+    + getUserId() : Integer
+    + setUserId(Integer userId) : void
+    + getCards() : List<Card>
+    + setCards(List<Card> cards) : void
+    + toString() : String
+}
+
+
+User "1" -- "0..*" TrainingRoutine : creates
+TrainingRoutine "1" -- "0..*" TrainingRoutineExcercise : contains
+User "1" -- "0..*" ShoppingCart : owns
+ShoppingCart "1" -- "0..*" ShoppingCartProduct : contains
+User "1" -- "0..*" Sale : makes
+Sale "1" -- "0..*" Reward : earns
+Product "1" -- "0..*" Points
+Product "1" -- "0..*" Reward : is
+Category "1" -- "0..*" Product : categorizes
+Brand "1" -- "0..*" Product : brands
+AdministrationVia "1" -- "0..*" Product : administers
+Product "1" -- "0..*" ShoppingCartProduct : contains
+Product "1" -- "0..*" Sale : includes
+NutrientProduct "1" -- "0..*" Product : contains
+Excercise "1" -- "0..*" TrainingRoutineExcercise : has
+Coupon "1" -- "0..*" Category : applies
+Nutrient "1" -- "0..*" NutrientProduct : contains
+Wallet "1" -- "0..*" Card : has
+User "1" -- "0..*" Wallet : has
+@enduml
